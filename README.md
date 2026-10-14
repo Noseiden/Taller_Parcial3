@@ -22,7 +22,7 @@ Con ROS 2 Jazzy ya instalado y configurado.
 ## 3. Organización del paquete
 
 ```text
-ros2_ws_dif/
+taller_RM/
 └── src/
     └── mi_robot_diferencial/
         ├── CMakeLists.txt
