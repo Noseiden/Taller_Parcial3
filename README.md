@@ -38,14 +38,12 @@ ros2_ws_dif/
         ├── rviz2/
         │   └── control.rviz
         ├── scripts/
-        │   └── comparacion.py
-        ├── meshes/                 # Si la pista emplea archivos STL
+        │   └── comparacion.py 
         └── msg/                    # Si se definieron mensajes propios
 ```
 
 - `urdf/`: define geometrías, inercias, articulaciones y sensores del robot mediante Xacro.
 - `worlds/`: contiene el escenario de Gazebo y las colisiones de la pista.
-- `meshes/`: guarda las mallas STL de muros u obstáculos, cuando se utilizan.
 - `config/bridge.yaml`: establece qué tópicos pasan entre Gazebo y ROS 2 y en qué dirección.
 - `scripts/comparacion.py`: calcula la odometría a partir de las ruedas y la compara con la simulación.
 - `rviz2/control.rviz`: configuración de visualización del modelo y los sensores.
@@ -69,7 +67,7 @@ El LiDAR simulado publica medidas de distancia en `/scan`. La cámara publica la
 
 ### Pista
 
-El mundo `pista.sdf` define el suelo y los elementos del escenario. Se pueden utilizar cajas y mallas STL como geometrías de visualización y de colisión; en el caso de STL exportados desde CAD en milímetros, debe aplicarse una escala `0.001 0.001 0.001` dentro de cada elemento `<mesh>`.
+El mundo `pista.sdf` define el suelo y los elementos del escenario. En este caso se usaron figuras rectangulares, cilindricas y trapezoidales con diferentes formas y tamaños para crear la pista.
 
 ## 5. Compilación y ejecución
 
@@ -84,12 +82,6 @@ ros2 launch mi_robot_diferencial mi_robot.launch.py
 ```
 
 El archivo launch está previsto para iniciar Gazebo, insertar el robot en el mundo (spawn), publicar su descripción mediante `robot_state_publisher`, iniciar el puente ROS 2–Gazebo, abrir RViz2 y ejecutar el nodo de comparación, según la configuración del paquete.
-
-Si la pista utiliza archivos STL referenciados con `model://`, se debe configurar `GZ_SIM_RESOURCE_PATH` para que Gazebo encuentre los recursos. En la versión del launch donde se agregó `SetEnvironmentVariable`, esto se hace automáticamente. Si no está configurado, se puede ejecutar antes del launch:
-
-```bash
-export GZ_SIM_RESOURCE_PATH="$(ros2 pkg prefix mi_robot_diferencial)/share:${GZ_SIM_RESOURCE_PATH}"
-```
 
 Cuando no haya cambios en el código o en los recursos instalados, no es necesario recompilar; basta con cargar el entorno y ejecutar el launch.
 
