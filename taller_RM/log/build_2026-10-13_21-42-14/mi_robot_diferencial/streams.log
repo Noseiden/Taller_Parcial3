@@ -1,0 +1,31 @@
+[0.020s] Invoking command in '/home/marco_aurelio_lorenzo/taller_RM/build/mi_robot_diferencial': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/marco_aurelio_lorenzo/taller_RM/build/mi_robot_diferencial -- -j2 -l2
+[0.073s] Invoked command in '/home/marco_aurelio_lorenzo/taller_RM/build/mi_robot_diferencial' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/marco_aurelio_lorenzo/taller_RM/build/mi_robot_diferencial -- -j2 -l2
+[0.086s] Invoking command in '/home/marco_aurelio_lorenzo/taller_RM/build/mi_robot_diferencial': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/marco_aurelio_lorenzo/taller_RM/build/mi_robot_diferencial
+[0.097s] -- Install configuration: ""
+[0.099s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/urdf
+[0.099s] -- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/urdf/mi_robot.urdf.xacro
+[0.099s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/worlds
+[0.101s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/worlds/pista.sdf
+[0.101s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/config
+[0.101s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/config/bridge.yaml
+[0.101s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/launch
+[0.101s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/launch/mi_robot.launch.py
+[0.101s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/rviz2
+[0.102s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/rviz2/control.rviz
+[0.102s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/lib/mi_robot_diferencial/comparacion.py
+[0.102s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/ament_index/resource_index/package_run_dependencies/mi_robot_diferencial
+[0.102s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/ament_index/resource_index/parent_prefix_path/mi_robot_diferencial
+[0.104s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/environment/ament_prefix_path.sh
+[0.104s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/environment/ament_prefix_path.dsv
+[0.104s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/environment/path.sh
+[0.104s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/environment/path.dsv
+[0.104s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/local_setup.bash
+[0.104s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/local_setup.sh
+[0.105s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/local_setup.zsh
+[0.105s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/local_setup.dsv
+[0.105s] -- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/package.dsv
+[0.105s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/ament_index/resource_index/packages/mi_robot_diferencial
+[0.105s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/cmake/mi_robot_diferencialConfig.cmake
+[0.105s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/cmake/mi_robot_diferencialConfig-version.cmake
+[0.105s] -- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/package.xml
+[0.108s] Invoked command in '/home/marco_aurelio_lorenzo/taller_RM/build/mi_robot_diferencial' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/marco_aurelio_lorenzo/taller_RM/build/mi_robot_diferencial

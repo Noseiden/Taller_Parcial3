@@ -1,0 +1,9 @@
+/home/marco_aurelio_lorenzo/taller_RM/build/mi_robot_diferencial/CMakeFiles/uninstall.dir
+/home/marco_aurelio_lorenzo/taller_RM/build/mi_robot_diferencial/CMakeFiles/mi_robot_diferencial_uninstall.dir
+/home/marco_aurelio_lorenzo/taller_RM/build/mi_robot_diferencial/CMakeFiles/test.dir
+/home/marco_aurelio_lorenzo/taller_RM/build/mi_robot_diferencial/CMakeFiles/edit_cache.dir
+/home/marco_aurelio_lorenzo/taller_RM/build/mi_robot_diferencial/CMakeFiles/rebuild_cache.dir
+/home/marco_aurelio_lorenzo/taller_RM/build/mi_robot_diferencial/CMakeFiles/list_install_components.dir
+/home/marco_aurelio_lorenzo/taller_RM/build/mi_robot_diferencial/CMakeFiles/install.dir
+/home/marco_aurelio_lorenzo/taller_RM/build/mi_robot_diferencial/CMakeFiles/install/local.dir
+/home/marco_aurelio_lorenzo/taller_RM/build/mi_robot_diferencial/CMakeFiles/install/strip.dir

@@ -1,0 +1,68 @@
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+-- Found ament_lint_auto: 0.17.5 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+-- Added test 'cppcheck' to perform static code analysis on C / C++ code
+-- Configured cppcheck include dirs: 
+-- Configured cppcheck exclude dirs and/or files: 
+-- Added test 'flake8' to check Python code syntax and style conventions
+-- Configured 'flake8' exclude dirs and/or files: 
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+-- Added test 'uncrustify' to check C / C++ code style
+-- Configured uncrustify additional arguments: 
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done (1.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/marco_aurelio_lorenzo/taller_RM/build/mi_robot_diferencial
+-- Install configuration: ""
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/urdf
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/urdf/mi_robot.urdf.xacro
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/worlds
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/worlds/pista.sdf
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/config
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/config/bridge.yaml
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/launch
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/launch/mi_robot.launch.py
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/rviz2
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/rviz2/control.rviz
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/lib/mi_robot_diferencial/comparacion.py
+-- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/urdf
+-- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/urdf/mi_robot.urdf.xacro
+-- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/worlds
+-- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/worlds/pista.sdf
+-- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/config
+-- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/config/bridge.yaml
+-- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/launch
+-- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/launch/mi_robot.launch.py
+-- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/rviz2
+-- Up-to-date: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/rviz2/control.rviz
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/meshes
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/meshes/Pistaint.stl
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/meshes/Pistaext.stl
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/ament_index/resource_index/package_run_dependencies/mi_robot_diferencial
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/ament_index/resource_index/parent_prefix_path/mi_robot_diferencial
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/environment/ament_prefix_path.sh
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/environment/ament_prefix_path.dsv
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/environment/path.sh
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/environment/path.dsv
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/local_setup.bash
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/local_setup.sh
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/local_setup.zsh
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/local_setup.dsv
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/package.dsv
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/ament_index/resource_index/packages/mi_robot_diferencial
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/cmake/mi_robot_diferencialConfig.cmake
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/cmake/mi_robot_diferencialConfig-version.cmake
+-- Installing: /home/marco_aurelio_lorenzo/taller_RM/install/mi_robot_diferencial/share/mi_robot_diferencial/package.xml
