@@ -1,0 +1,2793 @@
+<?xml version="1.0" ?>
+<!--
+  pista.sdf  -  Mundo para Gazebo Harmonic (generado con gen_pista.py)
+
+  Circuito cerrado en sentido horario, ancho de pista 4 m (cara interna a cara interna),
+  radio de curva 9 m (eje central). 228 muros con colision, 12 losas (rampas/plataforma),
+  7 obstaculos cilindricos (0.5 m diametro x 1 m alto).
+
+  SPAWN DEL ROBOT:  x=3  y=0  z=0.20  yaw=0   (mirando hacia +X, sobre la primera recta)
+  Ejemplo:  ros2 run ros_gz_sim create -topic robot_description -x 3 -y 0 -z 0.20 -Y 0.0
+-->
+<sdf version="1.9">
+  <world name="pista">
+
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <scene>
+      <ambient>0.5 0.5 0.5 1</ambient>
+      <background>0.6 0.75 0.9 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <light type="directional" name="sol">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 20 0 0 0</pose>
+      <diffuse>0.9 0.9 0.9 1</diffuse>
+      <specular>0.3 0.3 0.3 1</specular>
+      <direction>-0.4 0.3 -0.9</direction>
+    </light>
+
+    <!-- Suelo -->
+    <model name="suelo">
+      <static>true</static>
+      <link name="link">
+        <collision name="c">
+          <geometry><plane><normal>0 0 1</normal><size>300 300</size></plane></geometry>
+          <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+        </collision>
+        <visual name="v">
+          <geometry><plane><normal>0 0 1</normal><size>300 300</size></plane></geometry>
+          <material><ambient>0.35 0.37 0.38 1</ambient><diffuse>0.35 0.37 0.38 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Marca visual del punto de spawn (sin colision) -->
+    <model name="spawn_marker">
+      <static>true</static>
+      <pose>3 0 0.005 0 0 0</pose>
+      <link name="link">
+        <visual name="v">
+          <geometry><box><size>1.0 1.0 0.01</size></box></geometry>
+          <material><ambient>0.1 0.8 0.2 1</ambient><diffuse>0.1 0.8 0.2 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Muros y rampas (un solo modelo estatico) -->
+    <model name="pista">
+      <static>true</static>
+    <link name="muro_001_recta_01_inicio_i">
+      <pose>5.0000 2.1000 0.5000 0 -0.00000 0.00000</pose>
+      <collision name="c">
+        <geometry><box><size>10.1000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>10.1000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_002_recta_01_inicio_d">
+      <pose>5.0000 -2.1000 0.5000 0 -0.00000 0.00000</pose>
+      <collision name="c">
+        <geometry><box><size>10.1000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>10.1000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_003_curva_01_der_i">
+      <pose>10.8682 2.0317 0.5000 0 -0.00000 -0.07854</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_004_curva_01_der_i">
+      <pose>12.5833 1.7600 0.5000 0 -0.00000 -0.23562</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_005_curva_01_der_i">
+      <pose>14.2347 1.2234 0.5000 0 -0.00000 -0.39270</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_006_curva_01_der_i">
+      <pose>15.7819 0.4351 0.5000 0 -0.00000 -0.54978</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_007_curva_01_der_i">
+      <pose>17.1867 -0.5855 0.5000 0 -0.00000 -0.70686</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_008_curva_01_der_i">
+      <pose>18.4145 -1.8133 0.5000 0 -0.00000 -0.86394</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_009_curva_01_der_i">
+      <pose>19.4351 -3.2181 0.5000 0 -0.00000 -1.02102</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_010_curva_01_der_i">
+      <pose>20.2234 -4.7653 0.5000 0 -0.00000 -1.17810</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_011_curva_01_der_i">
+      <pose>20.7600 -6.4167 0.5000 0 -0.00000 -1.33518</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_012_curva_01_der_i">
+      <pose>21.0317 -8.1318 0.5000 0 -0.00000 -1.49226</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_013_curva_01_der_d">
+      <pose>10.5397 -2.1425 0.5000 0 -0.00000 -0.07854</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_014_curva_01_der_d">
+      <pose>11.6058 -2.3113 0.5000 0 -0.00000 -0.23562</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_015_curva_01_der_d">
+      <pose>12.6324 -2.6449 0.5000 0 -0.00000 -0.39270</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_016_curva_01_der_d">
+      <pose>13.5941 -3.1349 0.5000 0 -0.00000 -0.54978</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_017_curva_01_der_d">
+      <pose>14.4674 -3.7694 0.5000 0 -0.00000 -0.70686</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_018_curva_01_der_d">
+      <pose>15.2306 -4.5326 0.5000 0 -0.00000 -0.86394</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_019_curva_01_der_d">
+      <pose>15.8651 -5.4059 0.5000 0 -0.00000 -1.02102</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_020_curva_01_der_d">
+      <pose>16.3551 -6.3676 0.5000 0 -0.00000 -1.17810</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_021_curva_01_der_d">
+      <pose>16.6887 -7.3942 0.5000 0 -0.00000 -1.33518</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_022_curva_01_der_d">
+      <pose>16.8575 -8.4603 0.5000 0 -0.00000 -1.49226</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_023_recta_02_obstaculos_i">
+      <pose>21.1000 -14.0000 0.5000 0 -0.00000 -1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>10.1000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>10.1000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_024_recta_02_obstaculos_d">
+      <pose>16.9000 -14.0000 0.5000 0 -0.00000 -1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>10.1000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>10.1000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_025_curva_02_izq_i">
+      <pose>21.1425 -19.5397 0.5000 0 -0.00000 -1.49226</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_026_curva_02_izq_i">
+      <pose>21.3113 -20.6058 0.5000 0 -0.00000 -1.33518</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_027_curva_02_izq_i">
+      <pose>21.6449 -21.6324 0.5000 0 -0.00000 -1.17810</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_028_curva_02_izq_i">
+      <pose>22.1349 -22.5941 0.5000 0 -0.00000 -1.02102</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_029_curva_02_izq_i">
+      <pose>22.7694 -23.4674 0.5000 0 -0.00000 -0.86394</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_030_curva_02_izq_i">
+      <pose>23.5326 -24.2306 0.5000 0 -0.00000 -0.70686</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_031_curva_02_izq_i">
+      <pose>24.4059 -24.8651 0.5000 0 -0.00000 -0.54978</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_032_curva_02_izq_i">
+      <pose>25.3676 -25.3551 0.5000 0 -0.00000 -0.39270</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_033_curva_02_izq_i">
+      <pose>26.3942 -25.6887 0.5000 0 -0.00000 -0.23562</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_034_curva_02_izq_i">
+      <pose>27.4603 -25.8575 0.5000 0 -0.00000 -0.07854</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_035_curva_02_izq_d">
+      <pose>16.9683 -19.8682 0.5000 0 -0.00000 -1.49226</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_036_curva_02_izq_d">
+      <pose>17.2400 -21.5833 0.5000 0 -0.00000 -1.33518</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_037_curva_02_izq_d">
+      <pose>17.7766 -23.2347 0.5000 0 -0.00000 -1.17810</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_038_curva_02_izq_d">
+      <pose>18.5649 -24.7819 0.5000 0 -0.00000 -1.02102</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_039_curva_02_izq_d">
+      <pose>19.5855 -26.1867 0.5000 0 -0.00000 -0.86394</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_040_curva_02_izq_d">
+      <pose>20.8133 -27.4145 0.5000 0 -0.00000 -0.70686</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_041_curva_02_izq_d">
+      <pose>22.2181 -28.4351 0.5000 0 -0.00000 -0.54978</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_042_curva_02_izq_d">
+      <pose>23.7653 -29.2234 0.5000 0 -0.00000 -0.39270</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_043_curva_02_izq_d">
+      <pose>25.4167 -29.7600 0.5000 0 -0.00000 -0.23562</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_044_curva_02_izq_d">
+      <pose>27.1318 -30.0317 0.5000 0 -0.00000 -0.07854</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_045_recta_03_i">
+      <pose>30.0000 -25.9000 0.5000 0 -0.00000 0.00000</pose>
+      <collision name="c">
+        <geometry><box><size>4.1000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>4.1000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_046_recta_03_d">
+      <pose>30.0000 -30.1000 0.5000 0 -0.00000 0.00000</pose>
+      <collision name="c">
+        <geometry><box><size>4.1000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>4.1000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_047_curva_03_der_i">
+      <pose>32.8682 -25.9683 0.5000 0 -0.00000 -0.07854</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_048_curva_03_der_i">
+      <pose>34.5833 -26.2400 0.5000 0 -0.00000 -0.23562</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_049_curva_03_der_i">
+      <pose>36.2347 -26.7766 0.5000 0 -0.00000 -0.39270</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_050_curva_03_der_i">
+      <pose>37.7819 -27.5649 0.5000 0 -0.00000 -0.54978</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_051_curva_03_der_i">
+      <pose>39.1867 -28.5855 0.5000 0 -0.00000 -0.70686</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_052_curva_03_der_i">
+      <pose>40.4145 -29.8133 0.5000 0 -0.00000 -0.86394</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_053_curva_03_der_i">
+      <pose>41.4351 -31.2181 0.5000 0 -0.00000 -1.02102</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_054_curva_03_der_i">
+      <pose>42.2234 -32.7653 0.5000 0 -0.00000 -1.17810</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_055_curva_03_der_i">
+      <pose>42.7600 -34.4167 0.5000 0 -0.00000 -1.33518</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_056_curva_03_der_i">
+      <pose>43.0317 -36.1318 0.5000 0 -0.00000 -1.49226</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_057_curva_03_der_d">
+      <pose>32.5397 -30.1425 0.5000 0 -0.00000 -0.07854</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_058_curva_03_der_d">
+      <pose>33.6058 -30.3113 0.5000 0 -0.00000 -0.23562</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_059_curva_03_der_d">
+      <pose>34.6324 -30.6449 0.5000 0 -0.00000 -0.39270</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_060_curva_03_der_d">
+      <pose>35.5941 -31.1349 0.5000 0 -0.00000 -0.54978</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_061_curva_03_der_d">
+      <pose>36.4674 -31.7694 0.5000 0 -0.00000 -0.70686</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_062_curva_03_der_d">
+      <pose>37.2306 -32.5326 0.5000 0 -0.00000 -0.86394</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_063_curva_03_der_d">
+      <pose>37.8651 -33.4059 0.5000 0 -0.00000 -1.02102</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_064_curva_03_der_d">
+      <pose>38.3551 -34.3676 0.5000 0 -0.00000 -1.17810</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_065_curva_03_der_d">
+      <pose>38.6887 -35.3942 0.5000 0 -0.00000 -1.33518</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_066_curva_03_der_d">
+      <pose>38.8575 -36.4603 0.5000 0 -0.00000 -1.49226</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_067_recta_04_cilindro_i">
+      <pose>43.1000 -39.0000 0.5000 0 -0.00000 -1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>4.1000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>4.1000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_068_recta_04_cilindro_d">
+      <pose>38.9000 -39.0000 0.5000 0 -0.00000 -1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>4.1000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>4.1000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_069_curva_04_der_i">
+      <pose>43.0317 -41.8682 0.5000 0 -0.00000 -1.64934</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_070_curva_04_der_i">
+      <pose>42.7600 -43.5833 0.5000 0 -0.00000 -1.80642</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_071_curva_04_der_i">
+      <pose>42.2234 -45.2347 0.5000 0 -0.00000 -1.96350</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_072_curva_04_der_i">
+      <pose>41.4351 -46.7819 0.5000 0 -0.00000 -2.12058</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_073_curva_04_der_i">
+      <pose>40.4145 -48.1867 0.5000 0 -0.00000 -2.27765</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_074_curva_04_der_i">
+      <pose>39.1867 -49.4145 0.5000 0 -0.00000 -2.43473</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_075_curva_04_der_i">
+      <pose>37.7819 -50.4351 0.5000 0 -0.00000 -2.59181</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_076_curva_04_der_i">
+      <pose>36.2347 -51.2234 0.5000 0 -0.00000 -2.74889</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_077_curva_04_der_i">
+      <pose>34.5833 -51.7600 0.5000 0 -0.00000 -2.90597</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_078_curva_04_der_i">
+      <pose>32.8682 -52.0317 0.5000 0 -0.00000 -3.06305</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_079_curva_04_der_d">
+      <pose>38.8575 -41.5397 0.5000 0 -0.00000 -1.64934</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_080_curva_04_der_d">
+      <pose>38.6887 -42.6058 0.5000 0 -0.00000 -1.80642</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_081_curva_04_der_d">
+      <pose>38.3551 -43.6324 0.5000 0 -0.00000 -1.96350</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_082_curva_04_der_d">
+      <pose>37.8651 -44.5941 0.5000 0 -0.00000 -2.12058</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_083_curva_04_der_d">
+      <pose>37.2306 -45.4674 0.5000 0 -0.00000 -2.27765</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_084_curva_04_der_d">
+      <pose>36.4674 -46.2306 0.5000 0 -0.00000 -2.43473</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_085_curva_04_der_d">
+      <pose>35.5941 -46.8651 0.5000 0 -0.00000 -2.59181</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_086_curva_04_der_d">
+      <pose>34.6324 -47.3551 0.5000 0 -0.00000 -2.74889</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_087_curva_04_der_d">
+      <pose>33.6058 -47.6887 0.5000 0 -0.00000 -2.90597</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_088_curva_04_der_d">
+      <pose>32.5397 -47.8575 0.5000 0 -0.00000 -3.06305</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_089_recta_05_estrechamiento_i">
+      <pose>28.2500 -51.6000 0.5000 0 -0.00000 3.00904</pose>
+      <collision name="c">
+        <geometry><box><size>7.6664 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>7.6664 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_090_recta_05_estrechamiento_i">
+      <pose>20.7500 -51.1000 0.5000 0 -0.00000 3.14159</pose>
+      <collision name="c">
+        <geometry><box><size>7.6000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>7.6000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_091_recta_05_estrechamiento_d">
+      <pose>28.2500 -48.4000 0.5000 0 -0.00000 -3.00904</pose>
+      <collision name="c">
+        <geometry><box><size>7.6664 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>7.6664 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_092_recta_05_estrechamiento_d">
+      <pose>20.7500 -48.9000 0.5000 0 -0.00000 3.14159</pose>
+      <collision name="c">
+        <geometry><box><size>7.6000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>7.6000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_093_curva_05_der_i">
+      <pose>16.2100 -51.0378 0.5000 0 -0.00000 3.06305</pose>
+      <collision name="c">
+        <geometry><box><size>1.6849 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.6849 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_094_curva_05_der_i">
+      <pose>14.6495 -50.7907 0.5000 0 -0.00000 2.90597</pose>
+      <collision name="c">
+        <geometry><box><size>1.6849 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.6849 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_095_curva_05_der_i">
+      <pose>13.1468 -50.3024 0.5000 0 -0.00000 2.74889</pose>
+      <collision name="c">
+        <geometry><box><size>1.6849 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.6849 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_096_curva_05_der_i">
+      <pose>11.7390 -49.5851 0.5000 0 -0.00000 2.59181</pose>
+      <collision name="c">
+        <geometry><box><size>1.6849 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.6849 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_097_curva_05_der_i">
+      <pose>10.4608 -48.6564 0.5000 0 -0.00000 2.43473</pose>
+      <collision name="c">
+        <geometry><box><size>1.6849 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.6849 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_098_curva_05_der_i">
+      <pose>9.3436 -47.5392 0.5000 0 -0.00000 2.27765</pose>
+      <collision name="c">
+        <geometry><box><size>1.6849 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.6849 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_099_curva_05_der_i">
+      <pose>8.4149 -46.2610 0.5000 0 -0.00000 2.12058</pose>
+      <collision name="c">
+        <geometry><box><size>1.6849 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.6849 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_100_curva_05_der_i">
+      <pose>7.6976 -44.8532 0.5000 0 -0.00000 1.96350</pose>
+      <collision name="c">
+        <geometry><box><size>1.6849 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.6849 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_101_curva_05_der_i">
+      <pose>7.2093 -43.3505 0.5000 0 -0.00000 1.80642</pose>
+      <collision name="c">
+        <geometry><box><size>1.6849 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.6849 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_102_curva_05_der_i">
+      <pose>6.9622 -41.7900 0.5000 0 -0.00000 1.64934</pose>
+      <collision name="c">
+        <geometry><box><size>1.6849 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.6849 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_103_curva_05_der_d">
+      <pose>16.3821 -48.8514 0.5000 0 -0.00000 3.06305</pose>
+      <collision name="c">
+        <geometry><box><size>1.3397 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.3397 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_104_curva_05_der_d">
+      <pose>15.1615 -48.6580 0.5000 0 -0.00000 2.90597</pose>
+      <collision name="c">
+        <geometry><box><size>1.3397 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.3397 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_105_curva_05_der_d">
+      <pose>13.9861 -48.2761 0.5000 0 -0.00000 2.74889</pose>
+      <collision name="c">
+        <geometry><box><size>1.3397 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.3397 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_106_curva_05_der_d">
+      <pose>12.8850 -47.7151 0.5000 0 -0.00000 2.59181</pose>
+      <collision name="c">
+        <geometry><box><size>1.3397 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.3397 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_107_curva_05_der_d">
+      <pose>11.8852 -46.9887 0.5000 0 -0.00000 2.43473</pose>
+      <collision name="c">
+        <geometry><box><size>1.3397 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.3397 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_108_curva_05_der_d">
+      <pose>11.0113 -46.1148 0.5000 0 -0.00000 2.27765</pose>
+      <collision name="c">
+        <geometry><box><size>1.3397 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.3397 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_109_curva_05_der_d">
+      <pose>10.2849 -45.1150 0.5000 0 -0.00000 2.12058</pose>
+      <collision name="c">
+        <geometry><box><size>1.3397 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.3397 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_110_curva_05_der_d">
+      <pose>9.7239 -44.0139 0.5000 0 -0.00000 1.96350</pose>
+      <collision name="c">
+        <geometry><box><size>1.3397 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.3397 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_111_curva_05_der_d">
+      <pose>9.3420 -42.8385 0.5000 0 -0.00000 1.80642</pose>
+      <collision name="c">
+        <geometry><box><size>1.3397 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.3397 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_112_curva_05_der_d">
+      <pose>9.1486 -41.6179 0.5000 0 -0.00000 1.64934</pose>
+      <collision name="c">
+        <geometry><box><size>1.3397 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.3397 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_113_rampa_subida_i">
+      <pose>6.9000 -37.7859 2.4330 0 -0.52360 1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>8.1000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>8.1000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_114_rampa_subida_d">
+      <pose>9.1000 -37.7859 2.4330 0 -0.52360 1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>8.1000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>8.1000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_115_recta_06_alta_i">
+      <pose>6.4000 -29.0718 4.5000 0 -0.00000 1.67046</pose>
+      <collision name="c">
+        <geometry><box><size>10.1499 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>10.1499 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_116_recta_06_alta_d">
+      <pose>9.6000 -29.0718 4.5000 0 -0.00000 1.47113</pose>
+      <collision name="c">
+        <geometry><box><size>10.1499 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>10.1499 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_117_rampa_bajada_i">
+      <pose>5.9000 -20.3577 2.4330 0 0.52360 1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>8.1000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>8.1000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_118_rampa_bajada_d">
+      <pose>10.1000 -20.3577 2.4330 0 0.52360 1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>8.1000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>8.1000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_119_curva_06_izq_i">
+      <pose>5.8575 -16.6039 0.5000 0 -0.00000 1.64934</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_120_curva_06_izq_i">
+      <pose>5.6887 -15.5378 0.5000 0 -0.00000 1.80642</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_121_curva_06_izq_i">
+      <pose>5.3551 -14.5112 0.5000 0 -0.00000 1.96350</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_122_curva_06_izq_i">
+      <pose>4.8651 -13.5495 0.5000 0 -0.00000 2.12058</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_123_curva_06_izq_i">
+      <pose>4.2306 -12.6762 0.5000 0 -0.00000 2.27765</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_124_curva_06_izq_i">
+      <pose>3.4674 -11.9130 0.5000 0 -0.00000 2.43473</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_125_curva_06_izq_i">
+      <pose>2.5941 -11.2785 0.5000 0 -0.00000 2.59181</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_126_curva_06_izq_i">
+      <pose>1.6324 -10.7885 0.5000 0 -0.00000 2.74889</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_127_curva_06_izq_i">
+      <pose>0.6058 -10.4549 0.5000 0 -0.00000 2.90597</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_128_curva_06_izq_i">
+      <pose>-0.4603 -10.2861 0.5000 0 -0.00000 3.06305</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_129_curva_06_izq_d">
+      <pose>10.0317 -16.2754 0.5000 0 -0.00000 1.64934</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_130_curva_06_izq_d">
+      <pose>9.7600 -14.5603 0.5000 0 -0.00000 1.80642</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_131_curva_06_izq_d">
+      <pose>9.2234 -12.9089 0.5000 0 -0.00000 1.96350</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_132_curva_06_izq_d">
+      <pose>8.4351 -11.3617 0.5000 0 -0.00000 2.12058</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_133_curva_06_izq_d">
+      <pose>7.4145 -9.9569 0.5000 0 -0.00000 2.27765</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_134_curva_06_izq_d">
+      <pose>6.1867 -8.7291 0.5000 0 -0.00000 2.43473</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_135_curva_06_izq_d">
+      <pose>4.7819 -7.7085 0.5000 0 -0.00000 2.59181</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_136_curva_06_izq_d">
+      <pose>3.2347 -6.9201 0.5000 0 -0.00000 2.74889</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_137_curva_06_izq_d">
+      <pose>1.5833 -6.3836 0.5000 0 -0.00000 2.90597</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_138_curva_06_izq_d">
+      <pose>-0.1318 -6.1119 0.5000 0 -0.00000 3.06305</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_139_recta_07_obstaculos_i">
+      <pose>-6.0000 -10.2436 0.5000 0 -0.00000 -3.14159</pose>
+      <collision name="c">
+        <geometry><box><size>10.1000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>10.1000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_140_recta_07_obstaculos_d">
+      <pose>-6.0000 -6.0436 0.5000 0 -0.00000 -3.14159</pose>
+      <collision name="c">
+        <geometry><box><size>10.1000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>10.1000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_141_curva_07_izq_i">
+      <pose>-11.5397 -10.2861 0.5000 0 -0.00000 -3.06305</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_142_curva_07_izq_i">
+      <pose>-12.6058 -10.4549 0.5000 0 -0.00000 -2.90597</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_143_curva_07_izq_i">
+      <pose>-13.6324 -10.7885 0.5000 0 -0.00000 -2.74889</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_144_curva_07_izq_i">
+      <pose>-14.5941 -11.2785 0.5000 0 -0.00000 -2.59181</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_145_curva_07_izq_i">
+      <pose>-15.4674 -11.9130 0.5000 0 -0.00000 -2.43473</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_146_curva_07_izq_i">
+      <pose>-16.2306 -12.6762 0.5000 0 -0.00000 -2.27765</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_147_curva_07_izq_i">
+      <pose>-16.8651 -13.5495 0.5000 0 -0.00000 -2.12058</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_148_curva_07_izq_i">
+      <pose>-17.3551 -14.5112 0.5000 0 -0.00000 -1.96350</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_149_curva_07_izq_i">
+      <pose>-17.6887 -15.5378 0.5000 0 -0.00000 -1.80642</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_150_curva_07_izq_i">
+      <pose>-17.8575 -16.6039 0.5000 0 -0.00000 -1.64934</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_151_curva_07_izq_d">
+      <pose>-11.8682 -6.1119 0.5000 0 -0.00000 -3.06305</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_152_curva_07_izq_d">
+      <pose>-13.5833 -6.3836 0.5000 0 -0.00000 -2.90597</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_153_curva_07_izq_d">
+      <pose>-15.2347 -6.9201 0.5000 0 -0.00000 -2.74889</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_154_curva_07_izq_d">
+      <pose>-16.7819 -7.7085 0.5000 0 -0.00000 -2.59181</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_155_curva_07_izq_d">
+      <pose>-18.1867 -8.7291 0.5000 0 -0.00000 -2.43473</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_156_curva_07_izq_d">
+      <pose>-19.4145 -9.9569 0.5000 0 -0.00000 -2.27765</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_157_curva_07_izq_d">
+      <pose>-20.4351 -11.3617 0.5000 0 -0.00000 -2.12058</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_158_curva_07_izq_d">
+      <pose>-21.2234 -12.9089 0.5000 0 -0.00000 -1.96350</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_159_curva_07_izq_d">
+      <pose>-21.7600 -14.5603 0.5000 0 -0.00000 -1.80642</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_160_curva_07_izq_d">
+      <pose>-22.0317 -16.2754 0.5000 0 -0.00000 -1.64934</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_161_cierre_01_i">
+      <pose>-17.9000 -19.1436 0.5000 0 -0.00000 -1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>4.1000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>4.1000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_162_cierre_01_d">
+      <pose>-22.1000 -19.1436 0.5000 0 -0.00000 -1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>4.1000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>4.1000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_163_curva_08_der_i">
+      <pose>-17.9683 -22.0118 0.5000 0 -0.00000 -1.64934</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_164_curva_08_der_i">
+      <pose>-18.2400 -23.7268 0.5000 0 -0.00000 -1.80642</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_165_curva_08_der_i">
+      <pose>-18.7766 -25.3783 0.5000 0 -0.00000 -1.96350</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_166_curva_08_der_i">
+      <pose>-19.5649 -26.9254 0.5000 0 -0.00000 -2.12058</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_167_curva_08_der_i">
+      <pose>-20.5855 -28.3302 0.5000 0 -0.00000 -2.27765</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_168_curva_08_der_i">
+      <pose>-21.8133 -29.5581 0.5000 0 -0.00000 -2.43473</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_169_curva_08_der_i">
+      <pose>-23.2181 -30.5787 0.5000 0 -0.00000 -2.59181</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_170_curva_08_der_i">
+      <pose>-24.7653 -31.3670 0.5000 0 -0.00000 -2.74889</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_171_curva_08_der_i">
+      <pose>-26.4167 -31.9036 0.5000 0 -0.00000 -2.90597</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_172_curva_08_der_i">
+      <pose>-28.1318 -32.1753 0.5000 0 -0.00000 -3.06305</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_173_curva_08_der_d">
+      <pose>-22.1425 -21.6833 0.5000 0 -0.00000 -1.64934</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_174_curva_08_der_d">
+      <pose>-22.3113 -22.7494 0.5000 0 -0.00000 -1.80642</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_175_curva_08_der_d">
+      <pose>-22.6449 -23.7760 0.5000 0 -0.00000 -1.96350</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_176_curva_08_der_d">
+      <pose>-23.1349 -24.7377 0.5000 0 -0.00000 -2.12058</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_177_curva_08_der_d">
+      <pose>-23.7694 -25.6110 0.5000 0 -0.00000 -2.27765</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_178_curva_08_der_d">
+      <pose>-24.5326 -26.3742 0.5000 0 -0.00000 -2.43473</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_179_curva_08_der_d">
+      <pose>-25.4059 -27.0087 0.5000 0 -0.00000 -2.59181</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_180_curva_08_der_d">
+      <pose>-26.3676 -27.4987 0.5000 0 -0.00000 -2.74889</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_181_curva_08_der_d">
+      <pose>-27.3942 -27.8323 0.5000 0 -0.00000 -2.90597</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_182_curva_08_der_d">
+      <pose>-28.4603 -28.0011 0.5000 0 -0.00000 -3.06305</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_183_cierre_02_i">
+      <pose>-31.0000 -32.2436 0.5000 0 -0.00000 3.14159</pose>
+      <collision name="c">
+        <geometry><box><size>4.1000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>4.1000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_184_cierre_02_d">
+      <pose>-31.0000 -28.0436 0.5000 0 -0.00000 3.14159</pose>
+      <collision name="c">
+        <geometry><box><size>4.1000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>4.1000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_185_curva_09_der_i">
+      <pose>-33.8682 -32.1753 0.5000 0 -0.00000 3.06305</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_186_curva_09_der_i">
+      <pose>-35.5833 -31.9036 0.5000 0 -0.00000 2.90597</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_187_curva_09_der_i">
+      <pose>-37.2347 -31.3670 0.5000 0 -0.00000 2.74889</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_188_curva_09_der_i">
+      <pose>-38.7819 -30.5787 0.5000 0 -0.00000 2.59181</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_189_curva_09_der_i">
+      <pose>-40.1867 -29.5581 0.5000 0 -0.00000 2.43473</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_190_curva_09_der_i">
+      <pose>-41.4145 -28.3302 0.5000 0 -0.00000 2.27765</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_191_curva_09_der_i">
+      <pose>-42.4351 -26.9254 0.5000 0 -0.00000 2.12058</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_192_curva_09_der_i">
+      <pose>-43.2234 -25.3783 0.5000 0 -0.00000 1.96350</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_193_curva_09_der_i">
+      <pose>-43.7600 -23.7268 0.5000 0 -0.00000 1.80642</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_194_curva_09_der_i">
+      <pose>-44.0317 -22.0118 0.5000 0 -0.00000 1.64934</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_195_curva_09_der_d">
+      <pose>-33.5397 -28.0011 0.5000 0 -0.00000 3.06305</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_196_curva_09_der_d">
+      <pose>-34.6058 -27.8323 0.5000 0 -0.00000 2.90597</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_197_curva_09_der_d">
+      <pose>-35.6324 -27.4987 0.5000 0 -0.00000 2.74889</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_198_curva_09_der_d">
+      <pose>-36.5941 -27.0087 0.5000 0 -0.00000 2.59181</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_199_curva_09_der_d">
+      <pose>-37.4674 -26.3742 0.5000 0 -0.00000 2.43473</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_200_curva_09_der_d">
+      <pose>-38.2306 -25.6110 0.5000 0 -0.00000 2.27765</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_201_curva_09_der_d">
+      <pose>-38.8651 -24.7377 0.5000 0 -0.00000 2.12058</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_202_curva_09_der_d">
+      <pose>-39.3551 -23.7760 0.5000 0 -0.00000 1.96350</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_203_curva_09_der_d">
+      <pose>-39.6887 -22.7494 0.5000 0 -0.00000 1.80642</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_204_curva_09_der_d">
+      <pose>-39.8575 -21.6833 0.5000 0 -0.00000 1.64934</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_205_cierre_03_i">
+      <pose>-44.1000 -15.0718 0.5000 0 -0.00000 1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>12.2436 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>12.2436 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_206_cierre_03_d">
+      <pose>-39.9000 -15.0718 0.5000 0 -0.00000 1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>12.2436 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>12.2436 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_207_curva_10_der_i">
+      <pose>-44.0317 -8.1318 0.5000 0 -0.00000 1.49226</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_208_curva_10_der_i">
+      <pose>-43.7600 -6.4167 0.5000 0 -0.00000 1.33518</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_209_curva_10_der_i">
+      <pose>-43.2234 -4.7653 0.5000 0 -0.00000 1.17810</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_210_curva_10_der_i">
+      <pose>-42.4351 -3.2181 0.5000 0 -0.00000 1.02102</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_211_curva_10_der_i">
+      <pose>-41.4145 -1.8133 0.5000 0 -0.00000 0.86394</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_212_curva_10_der_i">
+      <pose>-40.1867 -0.5855 0.5000 0 -0.00000 0.70686</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_213_curva_10_der_i">
+      <pose>-38.7819 0.4351 0.5000 0 -0.00000 0.54978</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_214_curva_10_der_i">
+      <pose>-37.2347 1.2234 0.5000 0 -0.00000 0.39270</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_215_curva_10_der_i">
+      <pose>-35.5833 1.7600 0.5000 0 -0.00000 0.23562</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_216_curva_10_der_i">
+      <pose>-33.8682 2.0317 0.5000 0 -0.00000 0.07854</pose>
+      <collision name="c">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.8418 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_217_curva_10_der_d">
+      <pose>-39.8575 -8.4603 0.5000 0 -0.00000 1.49226</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_218_curva_10_der_d">
+      <pose>-39.6887 -7.3942 0.5000 0 -0.00000 1.33518</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_219_curva_10_der_d">
+      <pose>-39.3551 -6.3676 0.5000 0 -0.00000 1.17810</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_220_curva_10_der_d">
+      <pose>-38.8651 -5.4059 0.5000 0 -0.00000 1.02102</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_221_curva_10_der_d">
+      <pose>-38.2306 -4.5326 0.5000 0 -0.00000 0.86394</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_222_curva_10_der_d">
+      <pose>-37.4674 -3.7694 0.5000 0 -0.00000 0.70686</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_223_curva_10_der_d">
+      <pose>-36.5941 -3.1349 0.5000 0 -0.00000 0.54978</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_224_curva_10_der_d">
+      <pose>-35.6324 -2.6449 0.5000 0 -0.00000 0.39270</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_225_curva_10_der_d">
+      <pose>-34.6058 -2.3113 0.5000 0 -0.00000 0.23562</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_226_curva_10_der_d">
+      <pose>-33.5397 -2.1425 0.5000 0 -0.00000 0.07854</pose>
+      <collision name="c">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.1827 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_227_cierre_04_a_inicio_i">
+      <pose>-16.5000 2.1000 0.5000 0 -0.00000 0.00000</pose>
+      <collision name="c">
+        <geometry><box><size>33.1000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>33.1000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="muro_228_cierre_04_a_inicio_d">
+      <pose>-16.5000 -2.1000 0.5000 0 -0.00000 0.00000</pose>
+      <collision name="c">
+        <geometry><box><size>33.1000 0.2000 1.0000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>33.1000 0.2000 1.0000</size></box></geometry>
+        <material><ambient>0.8 0.8 0.82 1</ambient><diffuse>0.8 0.8 0.82 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="losa_001_rampa_subida">
+      <pose>8.0000 -37.4859 1.9134 0 -0.52360 1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>8.0500 2.4000 0.2000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>8.0500 2.4000 0.2000</size></box></geometry>
+        <material><ambient>0.9 0.75 0.25 1</ambient><diffuse>0.9 0.75 0.25 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="losa_002_recta_06_alta">
+      <pose>8.0000 -33.5718 3.9000 0 -0.00000 1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>1.0500 2.9000 0.2000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.0500 2.9000 0.2000</size></box></geometry>
+        <material><ambient>0.9 0.75 0.25 1</ambient><diffuse>0.9 0.75 0.25 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="losa_003_recta_06_alta">
+      <pose>8.0000 -32.5718 3.9000 0 -0.00000 1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>1.0500 3.1000 0.2000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.0500 3.1000 0.2000</size></box></geometry>
+        <material><ambient>0.9 0.75 0.25 1</ambient><diffuse>0.9 0.75 0.25 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="losa_004_recta_06_alta">
+      <pose>8.0000 -31.5718 3.9000 0 -0.00000 1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>1.0500 3.3000 0.2000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.0500 3.3000 0.2000</size></box></geometry>
+        <material><ambient>0.9 0.75 0.25 1</ambient><diffuse>0.9 0.75 0.25 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="losa_005_recta_06_alta">
+      <pose>8.0000 -30.5718 3.9000 0 -0.00000 1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>1.0500 3.5000 0.2000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.0500 3.5000 0.2000</size></box></geometry>
+        <material><ambient>0.9 0.75 0.25 1</ambient><diffuse>0.9 0.75 0.25 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="losa_006_recta_06_alta">
+      <pose>8.0000 -29.5718 3.9000 0 -0.00000 1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>1.0500 3.7000 0.2000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.0500 3.7000 0.2000</size></box></geometry>
+        <material><ambient>0.9 0.75 0.25 1</ambient><diffuse>0.9 0.75 0.25 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="losa_007_recta_06_alta">
+      <pose>8.0000 -28.5718 3.9000 0 -0.00000 1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>1.0500 3.9000 0.2000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.0500 3.9000 0.2000</size></box></geometry>
+        <material><ambient>0.9 0.75 0.25 1</ambient><diffuse>0.9 0.75 0.25 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="losa_008_recta_06_alta">
+      <pose>8.0000 -27.5718 3.9000 0 -0.00000 1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>1.0500 4.1000 0.2000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.0500 4.1000 0.2000</size></box></geometry>
+        <material><ambient>0.9 0.75 0.25 1</ambient><diffuse>0.9 0.75 0.25 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="losa_009_recta_06_alta">
+      <pose>8.0000 -26.5718 3.9000 0 -0.00000 1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>1.0500 4.3000 0.2000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.0500 4.3000 0.2000</size></box></geometry>
+        <material><ambient>0.9 0.75 0.25 1</ambient><diffuse>0.9 0.75 0.25 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="losa_010_recta_06_alta">
+      <pose>8.0000 -25.5718 3.9000 0 -0.00000 1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>1.0500 4.5000 0.2000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.0500 4.5000 0.2000</size></box></geometry>
+        <material><ambient>0.9 0.75 0.25 1</ambient><diffuse>0.9 0.75 0.25 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="losa_011_recta_06_alta">
+      <pose>8.0000 -24.5718 3.9000 0 -0.00000 1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>1.0500 4.7000 0.2000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>1.0500 4.7000 0.2000</size></box></geometry>
+        <material><ambient>0.9 0.75 0.25 1</ambient><diffuse>0.9 0.75 0.25 1</diffuse></material>
+      </visual>
+    </link>
+    <link name="losa_012_rampa_bajada">
+      <pose>8.0000 -20.6577 1.9134 0 0.52360 1.57080</pose>
+      <collision name="c">
+        <geometry><box><size>8.0500 4.4000 0.2000</size></box></geometry>
+        <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+      </collision>
+      <visual name="v">
+        <geometry><box><size>8.0500 4.4000 0.2000</size></box></geometry>
+        <material><ambient>0.9 0.75 0.25 1</ambient><diffuse>0.9 0.75 0.25 1</diffuse></material>
+      </visual>
+    </link>
+    </model>
+
+    <!-- Obstaculos -->
+  <model name="obstaculo_01">
+    <static>true</static>
+    <pose>19.7000 -11.5000 0.5000 0 0 0</pose>
+    <link name="link">
+      <collision name="c"><geometry><cylinder><radius>0.25</radius><length>1.0</length></cylinder></geometry></collision>
+      <visual name="v">
+        <geometry><cylinder><radius>0.25</radius><length>1.0</length></cylinder></geometry>
+        <material><ambient>0.95 0.45 0.05 1</ambient><diffuse>0.95 0.45 0.05 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+  <model name="obstaculo_02">
+    <static>true</static>
+    <pose>18.3000 -14.0000 0.5000 0 0 0</pose>
+    <link name="link">
+      <collision name="c"><geometry><cylinder><radius>0.25</radius><length>1.0</length></cylinder></geometry></collision>
+      <visual name="v">
+        <geometry><cylinder><radius>0.25</radius><length>1.0</length></cylinder></geometry>
+        <material><ambient>0.95 0.45 0.05 1</ambient><diffuse>0.95 0.45 0.05 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+  <model name="obstaculo_03">
+    <static>true</static>
+    <pose>19.7000 -16.5000 0.5000 0 0 0</pose>
+    <link name="link">
+      <collision name="c"><geometry><cylinder><radius>0.25</radius><length>1.0</length></cylinder></geometry></collision>
+      <visual name="v">
+        <geometry><cylinder><radius>0.25</radius><length>1.0</length></cylinder></geometry>
+        <material><ambient>0.95 0.45 0.05 1</ambient><diffuse>0.95 0.45 0.05 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+  <model name="obstaculo_04">
+    <static>true</static>
+    <pose>41.0000 -39.0000 0.5000 0 0 0</pose>
+    <link name="link">
+      <collision name="c"><geometry><cylinder><radius>0.25</radius><length>1.0</length></cylinder></geometry></collision>
+      <visual name="v">
+        <geometry><cylinder><radius>0.25</radius><length>1.0</length></cylinder></geometry>
+        <material><ambient>0.95 0.45 0.05 1</ambient><diffuse>0.95 0.45 0.05 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+  <model name="obstaculo_05">
+    <static>true</static>
+    <pose>-3.5000 -7.4436 0.5000 0 0 0</pose>
+    <link name="link">
+      <collision name="c"><geometry><cylinder><radius>0.25</radius><length>1.0</length></cylinder></geometry></collision>
+      <visual name="v">
+        <geometry><cylinder><radius>0.25</radius><length>1.0</length></cylinder></geometry>
+        <material><ambient>0.95 0.45 0.05 1</ambient><diffuse>0.95 0.45 0.05 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+  <model name="obstaculo_06">
+    <static>true</static>
+    <pose>-6.0000 -8.8436 0.5000 0 0 0</pose>
+    <link name="link">
+      <collision name="c"><geometry><cylinder><radius>0.25</radius><length>1.0</length></cylinder></geometry></collision>
+      <visual name="v">
+        <geometry><cylinder><radius>0.25</radius><length>1.0</length></cylinder></geometry>
+        <material><ambient>0.95 0.45 0.05 1</ambient><diffuse>0.95 0.45 0.05 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+  <model name="obstaculo_07">
+    <static>true</static>
+    <pose>-8.5000 -7.4436 0.5000 0 0 0</pose>
+    <link name="link">
+      <collision name="c"><geometry><cylinder><radius>0.25</radius><length>1.0</length></cylinder></geometry></collision>
+      <visual name="v">
+        <geometry><cylinder><radius>0.25</radius><length>1.0</length></cylinder></geometry>
+        <material><ambient>0.95 0.45 0.05 1</ambient><diffuse>0.95 0.45 0.05 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+
+  </world>
+</sdf>

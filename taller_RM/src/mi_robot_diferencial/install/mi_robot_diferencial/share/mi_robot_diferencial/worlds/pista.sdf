@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <world name="pista">
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+
+    <light type="directional" name="sol">
+      <pose>0 0 10 0 0 0</pose>
+      <direction>0.3 0.3 -1</direction>
+    </light>
+
+    <model name="piso">
+      <static>true</static>
+      <link name="link">
+        <collision name="col">
+          <geometry><plane><normal>0 0 1</normal><size>12 12</size></plane></geometry>
+        </collision>
+        <visual name="vis">
+          <geometry><plane><normal>0 0 1</normal><size>12 12</size></plane></geometry>
+          <material>
+            <ambient>0.35 0.35 0.35 1</ambient>
+            <diffuse>0.35 0.35 0.35 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="pista_cul">
+      <static>true</static>
+      <pose>0 0 0 0 0 0</pose>
+      <link name="paredes">
+        <visual name="pared_interior_visual">
+          <geometry>
+            <mesh><uri>model://mi_robot_diferencial/meshes/Pistaint.stl</uri>
+              <scale>0.001 0.001 0.001</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.85 0.18 0.15 1</ambient>
+            <diffuse>0.85 0.18 0.15 1</diffuse>
+          </material>
+        </visual>
+        <collision name="pared_interior_colision">
+          <geometry>
+            <mesh><uri>model://mi_robot_diferencial/meshes/Pistaint.stl</uri>
+              <scale>0.001 0.001 0.001</scale>
+            </mesh>
+            
+          </geometry>
+        </collision>
+        <visual name="pared_exterior_visual">
+          <geometry>
+            <mesh><uri>model://mi_robot_diferencial/meshes/Pistaext.stl</uri> 
+              <scale>0.001 0.001 0.001</scale>
+            </mesh>
+            
+          </geometry>
+          <material>
+            <ambient>0.13 0.33 0.85 1</ambient>
+            <diffuse>0.13 0.33 0.85 1</diffuse>
+          </material>
+        </visual>
+        <collision name="pared_exterior_colision">
+          <geometry>
+            <mesh><uri>model://mi_robot_diferencial/meshes/Pistaext.stl</uri>
+            <scale>0.001 0.001 0.001</scale> 
+            </mesh>
+             
+          </geometry>
+        </collision>
+
+      </link>
+    </model>
+  </world>
+</sdf>
